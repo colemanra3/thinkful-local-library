@@ -2,23 +2,6 @@ let getTotalBooksCount = books => books.length;
 
 let getTotalAccountsCount = accounts => accounts.length;
 
-// function getBooksBorrowedCount(books) {
-//   let sum = 0;
-//   return books.reduce( (sum,book) => {
-//     console.log(`sum:${sum}`);
-//     if ( book.borrows.some( borrow => !borrow.returned ) ) {
-//       return sum+1;
-//     } else {
-//       return sum;
-//     }
-//   },0);
-// }
-
-// function getBooksBorrowedCount(books) {
-//   return books.reduce( (sum,book) =>
-//     book.borrows.some( borrow => !borrow.returned ) ? sum+1 : sum, 0);
-// }
-
 let getBooksBorrowedCount = books =>
   books.reduce( (sum,book) =>
     book.borrows.some( borrow => !borrow.returned ) ? sum+1 : sum, 0);
@@ -30,7 +13,7 @@ function mostPopular (counts,max=5) {
     popular.push({ name: genre, count: counts[genre] });
   }
   // console.log(popular);
-  popular.sort( (a,b) => b.count - a.count );
+  popular.sort( (first,second) => second.count - first.count );
   // console.log(popular);
   if ( popular.length > 5 ) popular.length = 5;
   // console.log(popular);

@@ -9,21 +9,9 @@ function findBookById(books, id) {
 }
 
 function partitionBooksByBorrowedStatus(books) {
-  const status = [ [], [] ];
-  const borrowed = status[0];
-  const returned = status[1];
-  books.forEach( (book) => {
-    // console.log('book:'+book.id);
-    if ( book.borrows.some( borrow => !borrow.returned )) {
-      borrowed.push(book);
-      // console.log('borrowed:'+borrowed.length);
-    } else {
-      returned.push(book);
-      // console.log('returned:'+returned.length);
-    }
-  });
-  // console.log(status);
-  return status;
+  const borrowed = books.filter( book => book.borrows.some( ({returned}) => !returned ));
+  const returned = books.filter( book => book.borrows.every( ({returned}) => returned ));
+  return [ borrowed, returned ];
 }
 
 function getBorrowersForBook(book, accounts) {
